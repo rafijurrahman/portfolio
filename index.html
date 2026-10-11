@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Md. Rafijur Rahman | Data Analyst & BI Specialist</title>
+  <meta name="description" content="Portfolio of Md. Rafijur Rahman — Data Analyst specializing in SQL, Power BI (DAX), Python, and enterprise business intelligence case studies." />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              900: '#064e3b',
+              950: '#022c22',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #030712;
+      color: #f3f4f6;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .glass-card {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(51, 65, 85, 0.6);
+    }
+    .glass-card:hover {
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased selection:bg-emerald-500 selection:text-slate-950">
+
+  <!-- ================= TOP NAVIGATION ================= -->
+  <header class="fixed top-0 left-0 right-0 z-50 glass-card border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center font-mono font-bold text-slate-950 text-lg shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform">
+          RR
+        </div>
+        <div>
+          <span class="font-bold text-base tracking-tight text-white group-hover:text-emerald-400 transition-colors">Md. Rafijur Rahman</span>
+          <span class="block text-xs font-mono text-emerald-400 font-medium">Data Analyst • BI Practice</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="#projects" class="hover:text-emerald-400 transition-colors">Case Studies</a>
+        <a href="#skills" class="hover:text-emerald-400 transition-colors">Technical Stack</a>
+        <a href="#experience" class="hover:text-emerald-400 transition-colors">Experience</a>
+        <a href="#about" class="hover:text-emerald-400 transition-colors">About</a>
+        <a href="#contact" class="hover:text-emerald-400 transition-colors">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="https://github.com/rafijurrahman" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-all" title="GitHub Profile">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/mdrafijur" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-all" title="LinkedIn Profile">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.62 1.62 0 1 0 0 3.24 1.62 1.62 0 0 0 0-3.24z"/></svg>
+        </a>
+        <a href="#contact" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs sm:text-sm transition-all shadow-md shadow-emerald-500/20">
+          <span>Hire Me</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-28">
+
+    <!-- ================= HERO SECTION ================= -->
+    <section class="relative overflow-hidden py-16 lg:py-24 border-b border-slate-800/60">
+      <!-- Glow ambient background -->
+      <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-medium mb-6">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            AVAILABLE FOR DATA ANALYST ROLES • REMOTE / HYBRID / ON-SITE
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.15] mb-6">
+            Transforming Complex Data into <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-500">Revenue & Business Decisions</span>.
+          </h1>
+
+          <p class="text-lg sm:text-xl text-slate-300 leading-relaxed font-normal mb-8">
+            Data Analyst with a solid foundation in <strong class="text-white font-semibold">Statistics (B.Sc.)</strong> and 11 months of real-world clinical and operational reporting experience. Specialized in multi-table <strong class="text-emerald-400 font-semibold">production SQL</strong>, end-to-end <strong class="text-emerald-400 font-semibold">Power BI (DAX)</strong> intelligence systems, and actionable business case studies.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-4">
+            <a href="#projects" class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm transition-all shadow-lg shadow-emerald-500/25">
+              <span>View In-Depth Case Studies</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+            </a>
+            <a href="#contact" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700/80 font-semibold text-sm transition-all">
+              <span>Discuss an Opportunity</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Metric highlights banner -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 pt-12 border-t border-slate-800/80">
+          <div class="p-5 rounded-2xl glass-card">
+            <div class="font-mono text-3xl font-extrabold text-emerald-400">100+</div>
+            <div class="text-sm font-semibold text-white mt-1">Production SQL Drills</div>
+            <div class="text-xs text-slate-400 mt-1">CTEs, Window Fns, Joins</div>
+          </div>
+          <div class="p-5 rounded-2xl glass-card">
+            <div class="font-mono text-3xl font-extrabold text-emerald-400">11 Mos</div>
+            <div class="text-sm font-semibold text-white mt-1">Hospital Reporting</div>
+            <div class="text-xs text-slate-400 mt-1">Zero-error audit logs</div>
+          </div>
+          <div class="p-5 rounded-2xl glass-card">
+            <div class="font-mono text-3xl font-extrabold text-emerald-400">64 Dist.</div>
+            <div class="text-sm font-semibold text-white mt-1">Agri-Market Pipeline</div>
+            <div class="text-xs text-slate-400 mt-1">KrishiGrid Bangladesh</div>
+          </div>
+          <div class="p-5 rounded-2xl glass-card">
+            <div class="font-mono text-3xl font-extrabold text-emerald-400">B.Sc.</div>
+            <div class="text-sm font-semibold text-white mt-1">Statistics Honours</div>
+            <div class="text-xs text-slate-400 mt-1">Probability & modeling</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FEATURED CASE STUDIES / PROJECTS ================= -->
+    <section id="projects" class="py-20 lg:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div>
+          <div class="text-xs font-mono font-semibold uppercase tracking-wider text-emerald-400 mb-2">Portfolio Showcase</div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Interactive Case Studies</h2>
+          <p class="text-slate-400 text-sm sm:text-base mt-2 max-w-2xl">
+            Each project features full raw-to-cleaned data transformations, SQL query architectures, live dashboard embeds, and executive business recommendations.
+          </p>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="flex flex-wrap gap-2">
+          <button data-filter="All" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20">
+            All Projects
+          </button>
+          <button data-filter="Power BI" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-800/80 text-slate-300 hover:bg-slate-700">
+            Power BI & DAX
+          </button>
+          <button data-filter="SQL" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-800/80 text-slate-300 hover:bg-slate-700">
+            SQL & Modeling
+          </button>
+          <button data-filter="Python" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-800/80 text-slate-300 hover:bg-slate-700">
+            Python & ETL
+          </button>
+        </div>
+      </div>
+
+      <!-- Dynamic Projects Grid (Rendered by projects.js) -->
+      <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </section>
+
+    <!-- ================= TECHNICAL SKILL ARSENAL ================= -->
+    <section id="skills" class="py-20 bg-slate-900/40 border-y border-slate-800/70">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <div class="text-xs font-mono font-semibold uppercase tracking-wider text-emerald-400 mb-2">Technical Rigor</div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Core Competencies & Stack</h2>
+          <p class="text-slate-400 text-sm mt-2">Tested against real business scenarios, messy databases, and automated validation rules.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- SQL & Database -->
+          <div class="p-6 rounded-2xl glass-card flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-5">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">SQL & Relational DBs</h3>
+              <p class="text-xs text-slate-400 mb-4 leading-relaxed">Multi-table CTEs, Window Functions (DENSE_RANK, NTILE), Anti-Joins, Existence checks, Query profiling.</p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 pt-4 border-t border-slate-800">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-emerald-300">SQLite</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-emerald-300">MS SQL</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-emerald-300">PostgreSQL</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-emerald-300">CTEs</span>
+            </div>
+          </div>
+
+          <!-- Power BI & DAX -->
+          <div class="p-6 rounded-2xl glass-card flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-5">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Power BI & DAX</h3>
+              <p class="text-xs text-slate-400 mb-4 leading-relaxed">Star schema data modeling, complex CALCULATE filters, time intelligence, Power Query ETL, and executive reports.</p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 pt-4 border-t border-slate-800">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-amber-300">DAX</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-amber-300">Power Query</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-amber-300">Star Schema</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-amber-300">KPIs</span>
+            </div>
+          </div>
+
+          <!-- Python & Stats -->
+          <div class="p-6 rounded-2xl glass-card flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-5">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Python & Statistics</h3>
+              <p class="text-xs text-slate-400 mb-4 leading-relaxed">Automated data wrangling, missing-value imputation, regression diagnostics (residual plots), and P-value validation.</p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 pt-4 border-t border-slate-800">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-cyan-300">Pandas</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-cyan-300">NumPy</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-cyan-300">Seaborn</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-cyan-300">SciPy</span>
+            </div>
+          </div>
+
+          <!-- Advanced Excel & Modeling -->
+          <div class="p-6 rounded-2xl glass-card flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-5">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Advanced Excel</h3>
+              <p class="text-xs text-slate-400 mb-4 leading-relaxed">Power Pivot, XLOOKUP, nested logic models, pivot tables, financial reconciliation, and executive summary dashboards.</p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 pt-4 border-t border-slate-800">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-emerald-300">Power Pivot</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-emerald-300">XLOOKUP</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-emerald-300">Data Auditing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= EXPERIENCE & EDUCATION ================= -->
+    <section id="experience" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <!-- Experience -->
+        <div>
+          <div class="text-xs font-mono font-semibold uppercase tracking-wider text-emerald-400 mb-2">Track Record</div>
+          <h2 class="text-3xl font-extrabold text-white tracking-tight mb-8">Work Experience</h2>
+
+          <div class="space-y-6">
+            <div class="p-6 rounded-2xl glass-card relative pl-8 border-l-4 border-l-emerald-500">
+              <div class="text-xs font-mono text-emerald-400 font-semibold mb-1">Present</div>
+              <h3 class="text-lg font-bold text-white">Data Analyst</h3>
+              <div class="text-sm text-slate-300 font-medium mb-3">Independent Data & Business Intelligence Practice</div>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Building production-grade analytics pipelines, relational schemas, and Power BI interactive decision models. Developed KrishiGrid agricultural price monitoring and automated revenue leakage detection systems.
+              </p>
+            </div>
+
+            <div class="p-6 rounded-2xl glass-card relative pl-8 border-l-4 border-l-slate-700">
+              <div class="text-xs font-mono text-slate-400 font-semibold mb-1">Mar 2025 — Jan 2026 (11 Months)</div>
+              <h3 class="text-lg font-bold text-white">Data Assistant & Reporting Analyst</h3>
+              <div class="text-sm text-slate-300 font-medium mb-3">Dr. Salim Akond Eye Hospital & Phaco Center • Mirpur, Dhaka</div>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Standardized daily clinical logs, surgical schedules, and multi-department billing audits. Cleaned historical operational records, enforced zero-error data integrity, and delivered weekly management reports directly to clinic directorship.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Education & Certifications -->
+        <div id="about">
+          <div class="text-xs font-mono font-semibold uppercase tracking-wider text-emerald-400 mb-2">Foundation</div>
+          <h2 class="text-3xl font-extrabold text-white tracking-tight mb-8">Education & Credentials</h2>
+
+          <div class="space-y-6">
+            <div class="p-6 rounded-2xl glass-card">
+              <div class="text-xs font-mono text-emerald-400 font-semibold mb-1">Graduated</div>
+              <h3 class="text-lg font-bold text-white">B.Sc. (Honours) in Statistics</h3>
+              <div class="text-sm text-slate-300 font-medium mb-2">Govt. BM College • National University</div>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Core coursework: Probability Theory, Statistical Inference, Hypothesis Testing, Regression Modeling, Sampling Techniques, and Mathematical Statistics. (M.Sc. currently in progress).
+              </p>
+            </div>
+
+            <div class="p-6 rounded-2xl glass-card">
+              <div class="text-xs font-mono text-emerald-400 font-semibold mb-1">Verified Professional Certifications</div>
+              <div class="space-y-3 mt-3">
+                <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950/60 border border-slate-800">
+                  <div>
+                    <div class="text-sm font-bold text-white">IBM Data Analyst Professional Certificate</div>
+                    <div class="text-[11px] text-slate-400">SQL, Excel, Data Visualization, Python</div>
+                  </div>
+                  <span class="text-xs font-mono text-emerald-400 font-semibold">Verified</span>
+                </div>
+                <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950/60 border border-slate-800">
+                  <div>
+                    <div class="text-sm font-bold text-white">Google AI Professional Certificate</div>
+                    <div class="text-[11px] text-slate-400">AI Prompting, Automation & Applied Intelligence</div>
+                  </div>
+                  <span class="text-xs font-mono text-emerald-400 font-semibold">Verified</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= NETLIFY CONTACT FORM ================= -->
+    <section id="contact" class="py-20 lg:py-28 border-t border-slate-800 bg-slate-950">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <div class="text-xs font-mono font-semibold uppercase tracking-wider text-emerald-400 mb-2">Direct Channel</div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Let's Discuss Business Intelligence</h2>
+          <p class="text-slate-400 text-sm mt-2">
+            Interested in hiring me for a Data Analyst role or have a business intelligence consulting question? Leave a message below.
+          </p>
+        </div>
+
+        <div class="p-8 sm:p-10 rounded-3xl glass-card border border-slate-800/80 shadow-2xl">
+          <!-- Netlify Native Form -->
+          <form name="contact" method="POST" data-netlify="true" netlify class="space-y-6">
+            <input type="hidden" name="form-name" value="contact" />
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label for="name" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Your Name</label>
+                <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 text-sm" placeholder="e.g. Sarah Jenkins" />
+              </div>
+              <div>
+                <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Work Email</label>
+                <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 text-sm" placeholder="name@company.com" />
+              </div>
+            </div>
+
+            <div>
+              <label for="subject" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Subject / Opportunity</label>
+              <input type="text" id="subject" name="subject" required class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 text-sm" placeholder="e.g. Data Analyst Role / Business Dashboard" />
+            </div>
+
+            <div>
+              <label for="message" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Message</label>
+              <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 text-sm" placeholder="Tell me about your team, the problem you're solving, or your interview timeline..."></textarea>
+            </div>
+
+            <button type="submit" class="w-full py-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm tracking-wide transition-all shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-2">
+              <span>Send Direct Inquiry</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </button>
+          </form>
+
+          <div class="mt-8 pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
+            <div>
+              Direct Email: <a href="mailto:rafizurrahman3@gmail.com" class="text-emerald-400 font-mono hover:underline">rafizurrahman3@gmail.com</a>
+            </div>
+            <div>
+              Location: <span class="text-slate-200">Bangladesh (Open to Global Remote & Relocation)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="py-8 border-t border-slate-900 bg-slate-950 text-slate-500 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        © 2026 Md. Rafijur Rahman. Designed for high-impact decision support.
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="https://www.linkedin.com/in/mdrafijur" target="_blank" class="hover:text-emerald-400 transition-colors">LinkedIn</a>
+        <a href="https://github.com/rafijurrahman" target="_blank" class="hover:text-emerald-400 transition-colors">GitHub</a>
+        <a href="#projects" class="hover:text-emerald-400 transition-colors">Case Studies</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Portfolio Logic Script -->
+  <script src="projects.js"></script>
+</body>
+</html>

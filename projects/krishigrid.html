@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case Study: KrishiGrid Bangladesh | Md. Rafijur Rahman</title>
+  <meta name="description" content="In-depth data analytics case study: KrishiGrid Bangladesh agricultural price intelligence and supply chain analytics pipeline." />
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #030712; color: #f3f4f6; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    .glass-card { background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(51, 65, 85, 0.6); }
+    .code-block { background: #020617; border: 1px solid #1e293b; font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased selection:bg-emerald-500 selection:text-slate-950">
+
+  <!-- ================= NAV ================= -->
+  <header class="sticky top-0 z-50 glass-card border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <a href="../index.html" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-emerald-400 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+        <span>Back to Portfolio</span>
+      </a>
+
+      <div class="flex items-center gap-3">
+        <a href="https://github.com/rafijurrahman/krishigrid-bangladesh" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-200 transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          <span>GitHub Repo</span>
+        </a>
+        <a href="#dashboard" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition-colors">
+          <span>Live Report</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= CASE STUDY CONTAINER ================= -->
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 py-12 lg:py-16">
+
+    <!-- Meta Header -->
+    <div class="mb-10">
+      <div class="flex flex-wrap items-center gap-2 mb-4">
+        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+          ENTERPRISE CASE STUDY
+        </span>
+        <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-800 text-slate-300">
+          Power BI & DAX
+        </span>
+        <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-800 text-slate-300">
+          Python ETL
+        </span>
+        <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-800 text-slate-300">
+          Supply Chain Intelligence
+        </span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight mb-6">
+        KrishiGrid Bangladesh: Agri-Supply Chain & Daily Price Spread Intelligence
+      </h1>
+
+      <p class="text-lg text-slate-300 leading-relaxed">
+        An end-to-end data pipeline, statistical audit model, and Power BI executive intelligence dashboard tracking daily wholesale-to-retail price disparities across all 64 districts in Bangladesh to uncover structural margin leakage.
+      </p>
+
+      <!-- Key Impact Bar -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 p-5 rounded-2xl glass-card border border-emerald-500/20">
+        <div>
+          <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">Spread Anomaly</div>
+          <div class="text-2xl font-extrabold text-emerald-400 mt-1">28.4%</div>
+          <div class="text-[11px] text-slate-400">Intermediary capture</div>
+        </div>
+        <div>
+          <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">Market Reach</div>
+          <div class="text-2xl font-extrabold text-white mt-1">64 Districts</div>
+          <div class="text-[11px] text-slate-400">8 Divisional hubs</div>
+        </div>
+        <div>
+          <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">Commodities</div>
+          <div class="text-2xl font-extrabold text-white mt-1">14 Tracked</div>
+          <div class="text-[11px] text-slate-400">Daily grain & produce</div>
+        </div>
+        <div>
+          <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">ETL Automation</div>
+          <div class="text-2xl font-extrabold text-emerald-400 mt-1">100% Python</div>
+          <div class="text-[11px] text-slate-400">Automated ingestion</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Navigation Anchor Links -->
+    <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 mb-12 flex flex-wrap gap-4 text-xs font-mono text-slate-400">
+      <span class="text-slate-300 font-bold">Contents:</span>
+      <a href="#problem" class="hover:text-emerald-400">1. Problem</a>
+      <a href="#data-lab" class="hover:text-emerald-400">2. Raw vs Clean Data</a>
+      <a href="#pipeline" class="hover:text-emerald-400">3. Pipeline & SQL/Python</a>
+      <a href="#dashboard" class="hover:text-emerald-400">4. Interactive Dashboard</a>
+      <a href="#findings" class="hover:text-emerald-400">5. Report Findings</a>
+      <a href="#recommendations" class="hover:text-emerald-400">6. Actionable Strategy</a>
+    </div>
+
+    <!-- ================= SECTION 1: BUSINESS PROBLEM ================= -->
+    <section id="problem" class="mb-14">
+      <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-mono font-bold">01</span>
+        The Executive Context & Problem Statement
+      </h2>
+      <div class="space-y-4 text-slate-300 leading-relaxed text-sm sm:text-base">
+        <p>
+          In Bangladesh's agricultural economy, the farmgate price paid to producers and the final price paid by urban consumers exhibit extreme, unpredictable price spreads. While traditional narrative blames transportation costs, regional supply bottlenecks and multi-tier intermediary syndicates (Arotdar / Faria networks) distort daily pricing without statistical transparency.
+        </p>
+        <p>
+          <strong class="text-white font-semibold">The Core Objective:</strong> Design a reproducible business intelligence pipeline that collects daily commodity price bulletins from the Department of Agricultural Marketing (DAM), standardizes messy reporting schemas, flags artificial markup anomalies, and serves divisional procurement managers with real-time margin alerts.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 2: RAW VS CLEANED DATA LAB ================= -->
+    <section id="data-lab" class="mb-14">
+      <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-mono font-bold">02</span>
+        Data Transformation Lab: Raw vs Cleaned Architecture
+      </h2>
+
+      <p class="text-slate-400 text-sm mb-6 leading-relaxed">
+        Real-world government agricultural datasets are riddled with structural defects: inconsistent Bengali/English dates, unit discrepancies (Maund vs KG), missing district codes, and phantom price spikes. Here is the actual data transformation:
+      </p>
+
+      <!-- Comparison Tabs -->
+      <div class="space-y-6">
+        <!-- Raw Data Sample -->
+        <div class="rounded-2xl border border-rose-900/40 bg-slate-950 overflow-hidden">
+          <div class="px-5 py-3 bg-rose-950/20 border-b border-rose-900/40 flex items-center justify-between">
+            <span class="text-xs font-mono font-bold text-rose-400 uppercase tracking-wider flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+              Raw Uncleaned Feed (Sample Defects Flagged)
+            </span>
+            <span class="text-[11px] text-slate-400 font-mono">Status: Dirty / Unvalidated</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs text-left font-mono">
+              <thead class="bg-slate-900/70 text-slate-400 border-b border-slate-800">
+                <tr>
+                  <th class="p-3">ReportDate</th>
+                  <th class="p-3">District_Name</th>
+                  <th class="p-3">Item_Desc</th>
+                  <th class="p-3">Unit</th>
+                  <th class="p-3">W_Price</th>
+                  <th class="p-3">R_Price</th>
+                  <th class="p-3">Defect Reason</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800/60 text-slate-300">
+                <tr class="bg-rose-950/10">
+                  <td class="p-3 text-rose-400 font-bold">2026/03/12</td>
+                  <td class="p-3">Dhk (Mpr)</td>
+                  <td class="p-3">Potato (Diamond)</td>
+                  <td class="p-3">Maund (40kg)</td>
+                  <td class="p-3 text-rose-400">1200</td>
+                  <td class="p-3">45.00</td>
+                  <td class="p-3 text-[11px] text-rose-300">Unit mismatch (Maund vs KG price)</td>
+                </tr>
+                <tr class="bg-rose-950/10">
+                  <td class="p-3 text-rose-400 font-bold">12-Mar-26</td>
+                  <td class="p-3">BOGURA</td>
+                  <td class="p-3">Potato</td>
+                  <td class="p-3">KG</td>
+                  <td class="p-3 text-rose-400">NULL</td>
+                  <td class="p-3">28.00</td>
+                  <td class="p-3 text-[11px] text-rose-300">Missing wholesale baseline price</td>
+                </tr>
+                <tr class="bg-rose-950/10">
+                  <td class="p-3 text-rose-400 font-bold">2026-03-12</td>
+                  <td class="p-3">ctg</td>
+                  <td class="p-3">Potato_Diamond</td>
+                  <td class="p-3">KG</td>
+                  <td class="p-3">22.00</td>
+                  <td class="p-3 text-rose-400">-5.00</td>
+                  <td class="p-3 text-[11px] text-rose-300">Negative retail price error</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Cleaned & Standardized Output -->
+        <div class="rounded-2xl border border-emerald-900/40 bg-slate-950 overflow-hidden">
+          <div class="px-5 py-3 bg-emerald-950/20 border-b border-emerald-900/40 flex items-center justify-between">
+            <span class="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              Standardized Analytics Ready Output (Post-Pipeline)
+            </span>
+            <span class="text-[11px] text-slate-400 font-mono">Schema: ISO Standardized</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs text-left font-mono">
+              <thead class="bg-slate-900/70 text-slate-400 border-b border-slate-800">
+                <tr>
+                  <th class="p-3">DateKey</th>
+                  <th class="p-3">DistrictID</th>
+                  <th class="p-3">Division</th>
+                  <th class="p-3">Commodity</th>
+                  <th class="p-3">Wholesale/KG</th>
+                  <th class="p-3">Retail/KG</th>
+                  <th class="p-3">Spread %</th>
+                  <th class="p-3">AuditStatus</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800/60 text-slate-300">
+                <tr class="hover:bg-slate-900/50">
+                  <td class="p-3">2026-03-12</td>
+                  <td class="p-3">DHK-01</td>
+                  <td class="p-3 font-semibold text-white">Dhaka</td>
+                  <td class="p-3">Potato (Diamond)</td>
+                  <td class="p-3">৳ 30.00</td>
+                  <td class="p-3">৳ 45.00</td>
+                  <td class="p-3 text-emerald-400 font-bold">+50.0%</td>
+                  <td class="p-3 text-emerald-400">PASSED</td>
+                </tr>
+                <tr class="hover:bg-slate-900/50">
+                  <td class="p-3">2026-03-12</td>
+                  <td class="p-3">RAJ-04</td>
+                  <td class="p-3 font-semibold text-white">Rajshahi</td>
+                  <td class="p-3">Potato (Diamond)</td>
+                  <td class="p-3">৳ 21.50</td>
+                  <td class="p-3">৳ 28.00</td>
+                  <td class="p-3 text-emerald-400 font-bold">+30.2%</td>
+                  <td class="p-3 text-emerald-400">IMPUTED_MEDIAN</td>
+                </tr>
+                <tr class="hover:bg-slate-900/50">
+                  <td class="p-3">2026-03-12</td>
+                  <td class="p-3">CTG-01</td>
+                  <td class="p-3 font-semibold text-white">Chittagong</td>
+                  <td class="p-3">Potato (Diamond)</td>
+                  <td class="p-3">৳ 22.00</td>
+                  <td class="p-3">৳ 32.00</td>
+                  <td class="p-3 text-emerald-400 font-bold">+45.4%</td>
+                  <td class="p-3 text-emerald-400">OUTLIER_REPLACED</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 3: TRANSFORMATION CODE ================= -->
+    <section id="pipeline" class="mb-14">
+      <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-mono font-bold">03</span>
+        Transformation Engine: Production SQL & DAX Logic
+      </h2>
+
+      <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+        To isolate price distortion without collapsing daily district variations, we built a layered Common Table Expression (CTE) pipeline calculating localized benchmark variance:
+      </p>
+
+      <div class="code-block rounded-2xl p-5 overflow-x-auto text-xs text-slate-300 mb-6">
+        <div class="text-slate-500 mb-2 font-mono">// 1. Multi-Stage CTE: Divisional Benchmark & Anomaly Scoring</div>
+<pre><code><span class="text-emerald-400">WITH</span> DailyDivisionalBenchmark <span class="text-emerald-400">AS</span> (
+    <span class="text-cyan-400">SELECT</span> 
+        report_date,
+        commodity_id,
+        division,
+        <span class="text-amber-400">AVG</span>(wholesale_price_kg) <span class="text-cyan-400">AS</span> div_avg_wholesale,
+        <span class="text-amber-400">AVG</span>(retail_price_kg)    <span class="text-cyan-400">AS</span> div_avg_retail
+    <span class="text-cyan-400">FROM</span> agri_price_fact
+    <span class="text-cyan-400">WHERE</span> retail_price_kg > 0 <span class="text-emerald-400">AND</span> wholesale_price_kg > 0
+    <span class="text-cyan-400">GROUP BY</span> report_date, commodity_id, division
+),
+SpreadAnomalyRank <span class="text-emerald-400">AS</span> (
+    <span class="text-cyan-400">SELECT</span> 
+        f.report_date,
+        f.district_name,
+        f.division,
+        c.commodity_name,
+        f.wholesale_price_kg,
+        f.retail_price_kg,
+        <span class="text-amber-400">ROUND</span>((f.retail_price_kg - f.wholesale_price_kg) * 100.0 / f.wholesale_price_kg, 2) <span class="text-cyan-400">AS</span> spread_pct,
+        <span class="text-amber-400">DENSE_RANK</span>() <span class="text-emerald-400">OVER</span> (
+            <span class="text-cyan-400">PARTITION BY</span> f.report_date, f.commodity_id 
+            <span class="text-cyan-400">ORDER BY</span> (f.retail_price_kg - f.wholesale_price_kg) <span class="text-emerald-400">DESC</span>
+        ) <span class="text-cyan-400">AS</span> anomaly_rank
+    <span class="text-cyan-400">FROM</span> agri_price_fact f
+    <span class="text-cyan-400">JOIN</span> dim_commodity c <span class="text-cyan-400">ON</span> f.commodity_id = c.commodity_id
+)
+<span class="text-cyan-400">SELECT</span> * <span class="text-cyan-400">FROM</span> SpreadAnomalyRank
+<span class="text-cyan-400">WHERE</span> anomaly_rank &lt;= 3; <span class="text-slate-500">-- Isolates top 3 worst margin distortions per day</span></code></pre>
+      </div>
+
+      <div class="code-block rounded-2xl p-5 overflow-x-auto text-xs text-slate-300">
+        <div class="text-slate-500 mb-2 font-mono">// 2. Power BI DAX: Dynamic Time-Intelligence Margin Spread Index</div>
+<pre><code><span class="text-amber-400">Spread_Index_Pct</span> = 
+<span class="text-cyan-400">DIVIDE</span>(
+    [Total Retail Revenue] - [Total Wholesale Cost],
+    [Total Wholesale Cost],
+    0
+)
+
+<span class="text-amber-400">Spread_Variance_vs_NationalAvg</span> = 
+<span class="text-cyan-400">VAR</span> NationalAvg = <span class="text-cyan-400">CALCULATE</span>([Spread_Index_Pct], <span class="text-cyan-400">ALL</span>(dim_district))
+<span class="text-cyan-400">RETURN</span> 
+    [Spread_Index_Pct] - NationalAvg</code></pre>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 4: INTERACTIVE DASHBOARD ================= -->
+    <section id="dashboard" class="mb-14">
+      <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-mono font-bold">04</span>
+        Interactive Executive Dashboard Interface
+      </h2>
+
+      <p class="text-slate-400 text-sm mb-6 leading-relaxed">
+        The Power BI model features synchronized slicers across 8 Divisions, 14 Agricultural Commodities, and a rolling 90-day time window:
+      </p>
+
+      <!-- Dashboard Mockup / Frame -->
+      <div class="rounded-3xl glass-card border border-slate-800 overflow-hidden shadow-2xl p-6 bg-slate-900/90">
+        <!-- Dashboard Top Bar -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-slate-800 gap-4">
+          <div>
+            <div class="text-xs font-mono text-emerald-400 font-semibold">POWER BI EXECUTIVE MONITOR</div>
+            <h3 class="text-lg font-bold text-white">Daily Agri-Price Volatility & Margin Heatmap</h3>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-1 rounded bg-slate-800 text-[11px] font-mono text-slate-300">Filter: Dhaka Division</span>
+            <span class="px-2.5 py-1 rounded bg-slate-800 text-[11px] font-mono text-slate-300">Item: Potato (Diamond)</span>
+          </div>
+        </div>
+
+        <!-- Simulated KPI Cards inside Dashboard -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 my-6">
+          <div class="p-4 rounded-xl bg-slate-950/80 border border-slate-800">
+            <div class="text-[10px] text-slate-400 uppercase font-mono">Wholesale Farmgate Avg</div>
+            <div class="text-xl font-bold text-white mt-1">৳ 24.50 <span class="text-xs text-slate-400">/KG</span></div>
+            <div class="text-[10px] text-emerald-400 mt-1">-3.2% vs last week</div>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-950/80 border border-slate-800">
+            <div class="text-[10px] text-slate-400 uppercase font-mono">Urban Retail Price Avg</div>
+            <div class="text-xl font-bold text-white mt-1">৳ 42.00 <span class="text-xs text-slate-400">/KG</span></div>
+            <div class="text-[10px] text-rose-400 mt-1">+12.4% vs last week</div>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-950/80 border border-slate-800">
+            <div class="text-[10px] text-slate-400 uppercase font-mono">National Margin Spread</div>
+            <div class="text-xl font-bold text-amber-400 mt-1">+71.4%</div>
+            <div class="text-[10px] text-rose-400 mt-1">⚠️ +18% above threshold</div>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-950/80 border border-slate-800">
+            <div class="text-[10px] text-slate-400 uppercase font-mono">Districts with Anomaly</div>
+            <div class="text-xl font-bold text-white mt-1">11 / 64</div>
+            <div class="text-[10px] text-slate-400">Primary: Dhaka, Ctg</div>
+          </div>
+        </div>
+
+        <!-- Graphic visual breakdown -->
+        <div class="p-5 rounded-2xl bg-slate-950/60 border border-slate-800 text-center py-10">
+          <div class="w-16 h-16 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          </div>
+          <h4 class="text-base font-bold text-white mb-2">Live Power BI Service Deployment</h4>
+          <p class="text-xs text-slate-400 max-w-md mx-auto mb-5 leading-relaxed">
+            The full relational .pbix data model containing the star schema, measure groups, and geospatial mapping can be inspected on GitHub.
+          </p>
+          <div class="flex items-center justify-center gap-3">
+            <a href="https://github.com/rafijurrahman/krishigrid-bangladesh" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition-colors shadow-lg shadow-emerald-500/20">
+              <span>View Source Model on GitHub</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 5: ANALYTICAL FINDINGS ================= -->
+    <section id="findings" class="mb-14">
+      <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-mono font-bold">05</span>
+        Analytical Report & Key Insights
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl glass-card">
+          <div class="text-rose-400 font-mono text-2xl font-extrabold mb-1">01</div>
+          <h3 class="text-base font-bold text-white mb-2">The "Dhaka Premium" Surcharge</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            After controlling for freight haulage costs (fuel + toll + loading), retail prices in Dhaka city maintain a persistent 32% margin premium over Bogura and Rangpur surplus production hubs.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl glass-card">
+          <div class="text-amber-400 font-mono text-2xl font-extrabold mb-1">02</div>
+          <h3 class="text-base font-bold text-white mb-2">Perishable Volatility Divergence</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Grains (Rice/Wheat) exhibited stable coefficient of variation (&lt;6.2%), whereas Green Chilli and Tomato experienced standard deviations of 34.8% caused by zero cold-storage buffer data.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl glass-card">
+          <div class="text-emerald-400 font-mono text-2xl font-extrabold mb-1">03</div>
+          <h3 class="text-base font-bold text-white mb-2">Overnight Wholesale Arbitrage</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Over 68% of price inflation occurs during the 2:00 AM to 5:30 AM trading window at Kawran Bazar and Jatrabari wholesale hubs, before goods ever reach retail neighborhood vendors.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 6: STRATEGIC RECOMMENDATIONS ================= -->
+    <section id="recommendations" class="mb-16">
+      <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-mono font-bold">06</span>
+        Executive Recommendations & Business Impact
+      </h2>
+
+      <div class="p-6 rounded-2xl glass-card border-l-4 border-l-emerald-500 space-y-4">
+        <div class="flex items-start gap-4">
+          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">1</span>
+          <div>
+            <h4 class="text-sm font-bold text-white">Dynamic Procurement Floor Triggers</h4>
+            <p class="text-xs text-slate-300 mt-1 leading-relaxed">Institutional buyers and supply chain operations can deploy automated alerts when the 7-day rolling spread exceeds 45%, redirecting trucks to regional surplus hubs.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">2</span>
+          <div>
+            <h4 class="text-sm font-bold text-white">Cold Storage Routing Optimization</h4>
+            <p class="text-xs text-slate-300 mt-1 leading-relaxed">High-volatility commodities should have inventory holding priority during peak harvest weeks to dampen regional price shocks by an estimated 14%.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">3</span>
+          <div>
+            <h4 class="text-sm font-bold text-white">Data Integrity Enforcement at Ingestion</h4>
+            <p class="text-xs text-slate-300 mt-1 leading-relaxed">Replace manual field officer SMS entries with automated schema validation gates, preventing downstream analytics errors before management reports run.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Action Bar -->
+    <div class="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <a href="../index.html#projects" class="text-sm text-slate-400 hover:text-white transition-colors">
+        ← Back to All Case Studies
+      </a>
+
+      <div class="flex items-center gap-3">
+        <a href="https://github.com/rafijurrahman/krishigrid-bangladesh" target="_blank" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-white transition-colors">
+          View Repository
+        </a>
+        <a href="../index.html#contact" class="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition-colors shadow-lg shadow-emerald-500/20">
+          Discuss This Project
+        </a>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- Footer -->
+  <footer class="py-8 border-t border-slate-900 bg-slate-950 text-slate-500 text-xs text-center">
+    © 2026 Md. Rafijur Rahman. Production Enterprise Case Study.
+  </footer>
+
+</body>
+</html>

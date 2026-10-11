@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- STEP 1: CHANGE PROJECT TITLE -->
+  <title>Case Study: [Project Title Here] | Md. Rafijur Rahman</title>
+  <meta name="description" content="[One sentence summary of this data analysis project]" />
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { 400: '#34d399', 500: '#10b981', 600: '#059669' }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #030712; color: #f3f4f6; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    .glass-card { background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(51, 65, 85, 0.6); }
+    .code-block { background: #020617; border: 1px solid #1e293b; font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased selection:bg-emerald-500 selection:text-slate-950">
+
+  <!-- ================= NAV ================= -->
+  <header class="sticky top-0 z-50 glass-card border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <a href="../index.html" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-emerald-400 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+        <span>Back to Portfolio</span>
+      </a>
+
+      <div class="flex items-center gap-3">
+        <!-- Change to your project GitHub URL -->
+        <a href="https://github.com/rafijurrahman" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-200 transition-colors">
+          <span>GitHub Code</span>
+        </a>
+        <a href="#dashboard" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition-colors">
+          <span>Live View</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= CASE STUDY CONTAINER ================= -->
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 py-12 lg:py-16">
+
+    <!-- Meta Header -->
+    <div class="mb-10">
+      <div class="flex flex-wrap items-center gap-2 mb-4">
+        <!-- STEP 2: CATEGORY BADGES -->
+        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+          PRODUCTION CASE STUDY
+        </span>
+        <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-800 text-slate-300">
+          SQL (CTEs & Window Functions)
+        </span>
+        <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-800 text-slate-300">
+          Power BI
+        </span>
+      </div>
+
+      <!-- STEP 3: HEADLINE & SUMMARY -->
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight mb-6">
+        [Project Name]: Business Analytics & Decision System
+      </h1>
+
+      <p class="text-lg text-slate-300 leading-relaxed">
+        [Explain what you analyzed, what data you used, and what key business decision or revenue metric you improved.]
+      </p>
+
+      <!-- STEP 4: KEY IMPACT METRICS -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 p-5 rounded-2xl glass-card border border-emerald-500/20">
+        <div>
+          <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">Metric 1</div>
+          <div class="text-2xl font-extrabold text-emerald-400 mt-1">$142,000</div>
+          <div class="text-[11px] text-slate-400">Revenue recovered</div>
+        </div>
+        <div>
+          <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">Metric 2</div>
+          <div class="text-2xl font-extrabold text-white mt-1">14.2%</div>
+          <div class="text-[11px] text-slate-400">Churn reduction</div>
+        </div>
+        <div>
+          <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">Records Analyzed</div>
+          <div class="text-2xl font-extrabold text-white mt-1">2.4M</div>
+          <div class="text-[11px] text-slate-400">Transactions</div>
+        </div>
+        <div>
+          <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">Audit Integrity</div>
+          <div class="text-2xl font-extrabold text-emerald-400 mt-1">100%</div>
+          <div class="text-[11px] text-slate-400">Zero discrepancies</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 mb-12 flex flex-wrap gap-4 text-xs font-mono text-slate-400">
+      <span class="text-slate-300 font-bold">Contents:</span>
+      <a href="#problem" class="hover:text-emerald-400">1. Problem</a>
+      <a href="#data-lab" class="hover:text-emerald-400">2. Raw vs Clean Data</a>
+      <a href="#pipeline" class="hover:text-emerald-400">3. SQL / Logic</a>
+      <a href="#dashboard" class="hover:text-emerald-400">4. Dashboard</a>
+      <a href="#findings" class="hover:text-emerald-400">5. Report Findings</a>
+      <a href="#recommendations" class="hover:text-emerald-400">6. Recommendations</a>
+    </div>
+
+    <!-- ================= SECTION 1: BUSINESS PROBLEM ================= -->
+    <section id="problem" class="mb-14">
+      <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-mono font-bold">01</span>
+        Business Context & Problem Statement
+      </h2>
+      <div class="space-y-4 text-slate-300 leading-relaxed text-sm sm:text-base">
+        <p>
+          [Describe the business scenario here: What was the pain point? What was broken, leaking money, or causing delays in decision-making?]
+        </p>
+        <p>
+          <strong class="text-white font-semibold">The Core Objective:</strong> [Describe what you set out to build, fix, or uncover using data analytics.]
+        </p>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 2: RAW VS CLEAN DATA LAB ================= -->
+    <section id="data-lab" class="mb-14">
+      <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-mono font-bold">02</span>
+        Data Transformation Lab: Raw vs Cleaned Data
+      </h2>
+      <p class="text-slate-400 text-sm mb-6 leading-relaxed">
+        [Explain what data issues existed in the raw dataset: e.g., missing keys, inconsistent data types, duplicate records, or negative values.]
+      </p>
+
+      <!-- Raw Table Preview -->
+      <div class="space-y-6">
+        <div class="rounded-2xl border border-rose-900/40 bg-slate-950 overflow-hidden">
+          <div class="px-5 py-3 bg-rose-950/20 border-b border-rose-900/40 flex items-center justify-between">
+            <span class="text-xs font-mono font-bold text-rose-400 uppercase tracking-wider flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+              Raw Uncleaned Feed (Sample Defects)
+            </span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs text-left font-mono">
+              <thead class="bg-slate-900/70 text-slate-400 border-b border-slate-800">
+                <tr>
+                  <th class="p-3">RecordID</th>
+                  <th class="p-3">Date</th>
+                  <th class="p-3">Amount</th>
+                  <th class="p-3">Status</th>
+                  <th class="p-3">Identified Defect</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800/60 text-slate-300">
+                <tr class="bg-rose-950/10">
+                  <td class="p-3 text-rose-400 font-bold">#1029</td>
+                  <td class="p-3">NULL</td>
+                  <td class="p-3">-150.00</td>
+                  <td class="p-3">pendng</td>
+                  <td class="p-3 text-rose-300">Negative value & typo in status</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Cleaned Table Preview -->
+        <div class="rounded-2xl border border-emerald-900/40 bg-slate-950 overflow-hidden">
+          <div class="px-5 py-3 bg-emerald-950/20 border-b border-emerald-900/40 flex items-center justify-between">
+            <span class="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              Standardized Analytics Ready Output
+            </span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs text-left font-mono">
+              <thead class="bg-slate-900/70 text-slate-400 border-b border-slate-800">
+                <tr>
+                  <th class="p-3">RecordID</th>
+                  <th class="p-3">DateKey</th>
+                  <th class="p-3">Amount</th>
+                  <th class="p-3">Status</th>
+                  <th class="p-3">AuditStatus</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800/60 text-slate-300">
+                <tr>
+                  <td class="p-3">#1029</td>
+                  <td class="p-3">2026-03-12</td>
+                  <td class="p-3 font-semibold text-white">৳ 150.00</td>
+                  <td class="p-3 font-semibold text-emerald-400">PENDING</td>
+                  <td class="p-3 text-emerald-400">VALIDATED</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 3: CODE / SQL / LOGIC ================= -->
+    <section id="pipeline" class="mb-14">
+      <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-mono font-bold">03</span>
+        Transformation Engine: SQL / DAX Logic
+      </h2>
+      <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+        [Explain your query architecture: CTEs, Window Functions, or DAX measures used.]
+      </p>
+
+      <div class="code-block rounded-2xl p-5 overflow-x-auto text-xs text-slate-300">
+<pre><code><span class="text-emerald-400">WITH</span> CustomerOrderTiers <span class="text-emerald-400">AS</span> (
+    <span class="text-cyan-400">SELECT</span> 
+        customer_id,
+        <span class="text-amber-400">SUM</span>(total_amount) <span class="text-cyan-400">AS</span> lifetime_spend,
+        <span class="text-amber-400">DENSE_RANK</span>() <span class="text-emerald-400">OVER</span> (<span class="text-cyan-400">ORDER BY</span> <span class="text-amber-400">SUM</span>(total_amount) <span class="text-emerald-400">DESC</span>) <span class="text-cyan-400">AS</span> spend_rank
+    <span class="text-cyan-400">FROM</span> orders
+    <span class="text-cyan-400">WHERE</span> order_status != <span class="text-rose-400">'Cancelled'</span>
+    <span class="text-cyan-400">GROUP BY</span> customer_id
+)
+<span class="text-cyan-400">SELECT</span> * <span class="text-cyan-400">FROM</span> CustomerOrderTiers
+<span class="text-cyan-400">WHERE</span> spend_rank &lt;= 10;</code></pre>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 4: DASHBOARD ================= -->
+    <section id="dashboard" class="mb-14">
+      <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-mono font-bold">04</span>
+        Dashboard Interface & Visual Analytics
+      </h2>
+      <div class="rounded-3xl glass-card border border-slate-800 p-8 text-center bg-slate-900/90">
+        <h3 class="text-lg font-bold text-white mb-2">[Insert Interactive Power BI Embed / Screenshot Here]</h3>
+        <p class="text-xs text-slate-400 max-w-md mx-auto mb-6">
+          You can paste a Power BI iframe embed tag here, or link to a high-resolution screenshot and interactive web viewer.
+        </p>
+        <a href="https://github.com/rafijurrahman" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-bold text-xs">
+          <span>View Live Model on GitHub</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 5: ANALYTICAL FINDINGS ================= -->
+    <section id="findings" class="mb-14">
+      <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-mono font-bold">05</span>
+        Analytical Report & Key Findings
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl glass-card">
+          <div class="text-emerald-400 font-mono text-2xl font-extrabold mb-1">01</div>
+          <h3 class="text-base font-bold text-white mb-2">[Key Finding #1]</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">[Explain what the data revealed about this specific business metric.]</p>
+        </div>
+        <div class="p-6 rounded-2xl glass-card">
+          <div class="text-amber-400 font-mono text-2xl font-extrabold mb-1">02</div>
+          <h3 class="text-base font-bold text-white mb-2">[Key Finding #2]</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">[Explain the second major observation or unexpected correlation.]</p>
+        </div>
+        <div class="p-6 rounded-2xl glass-card">
+          <div class="text-cyan-400 font-mono text-2xl font-extrabold mb-1">03</div>
+          <h3 class="text-base font-bold text-white mb-2">[Key Finding #3]</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">[Explain operational friction or bottleneck identified.]</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 6: RECOMMENDATIONS ================= -->
+    <section id="recommendations" class="mb-16">
+      <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-mono font-bold">06</span>
+        Executive Recommendations & Strategic Next Steps
+      </h2>
+      <div class="p-6 rounded-2xl glass-card border-l-4 border-l-emerald-500 space-y-4">
+        <div>
+          <h4 class="text-sm font-bold text-white">1. [Recommendation One]</h4>
+          <p class="text-xs text-slate-300 mt-1">[Concrete action item for decision makers based on the analysis.]</p>
+        </div>
+        <div>
+          <h4 class="text-sm font-bold text-white">2. [Recommendation Two]</h4>
+          <p class="text-xs text-slate-300 mt-1">[Expected ROI, cost savings, or operational risk prevention.]</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Navigation -->
+    <div class="pt-8 border-t border-slate-800 flex items-center justify-between">
+      <a href="../index.html#projects" class="text-sm text-slate-400 hover:text-white transition-colors">
+        ← Back to All Projects
+      </a>
+      <a href="../index.html#contact" class="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition-colors">
+        Discuss This Case Study
+      </a>
+    </div>
+
+  </article>
+
+  <footer class="py-8 border-t border-slate-900 bg-slate-950 text-slate-500 text-xs text-center">
+    © 2026 Md. Rafijur Rahman. Production Enterprise Case Study.
+  </footer>
+
+</body>
+</html>
