@@ -27,60 +27,6 @@ const PROJECTS_DATA = [
     githubUrl: "https://github.com/rafijurrahman/krishigrid-bangladesh",
     liveDemoUrl: "projects/krishigrid.html#dashboard",
     image: "https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: "retail-revenue-leakage",
-    title: "Retail Intelligence: Revenue Leakage & Churn Analytics",
-    category: "SQL & Data Modeling",
-    badge: "Production SQL",
-    featured: true,
-    summary: "Engineered multi-stage CTEs, Window Functions, and anti-join existence checks on a 4-table relational database to identify $142K in dormant customer revenue loss and fulfillment bottlenecks.",
-    impactMetrics: [
-      { label: "Dormant Revenue Detected", value: "$142,000" },
-      { label: "Order Cancellation Rate", value: "14.2% Fixed" },
-      { label: "Query Execution Optimization", value: "3.2x Faster" }
-    ],
-    techStack: ["SQL (SQLite/PostgreSQL)", "Window Functions", "CTEs", "Data Modeling", "Excel"],
-    caseStudyUrl: "projects/case-study-template.html",
-    githubUrl: "https://github.com/rafijurrahman",
-    liveDemoUrl: null,
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: "healthcare-operational-reporting",
-    title: "Clinical Operations & Patient Flow Analytics",
-    category: "Business Intelligence",
-    badge: "Real-World Experience",
-    featured: true,
-    summary: "Standardized 11 months of hospital patient logs, surgical scheduling, and billing records at Dr. Salim Akond Eye Hospital. Eliminated reporting discrepancies across 3 medical departments.",
-    impactMetrics: [
-      { label: "Audit Accuracy", value: "99.8%" },
-      { label: "Reporting Turnaround", value: "Same-Day" },
-      { label: "Operational Logs Handled", value: "11 Months" }
-    ],
-    techStack: ["Power BI", "Excel Advanced", "Data Validation", "Healthcare Metrics"],
-    caseStudyUrl: "projects/case-study-template.html",
-    githubUrl: "https://github.com/rafijurrahman",
-    liveDemoUrl: null,
-    image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: "vantage-job-intel",
-    title: "Vantage: Automated Job Market Intelligence Pipeline",
-    category: "Python & Automation",
-    badge: "Automation System",
-    featured: false,
-    summary: "Architected a local job market intelligence system with MS SQL Server backend, deduplication algorithms, and automated alerts to track market skill demand shifts in real-time.",
-    impactMetrics: [
-      { label: "Pipeline Status", value: "100% Automated" },
-      { label: "Data Deduplication", value: "Real-Time" },
-      { label: "Storage Engine", value: "MS SQL Server" }
-    ],
-    techStack: ["Python", "MS SQL Server", "APIs", "Automation", "Telegram Alerts"],
-    caseStudyUrl: "projects/case-study-template.html",
-    githubUrl: "https://github.com/rafijurrahman",
-    liveDemoUrl: null,
-    image: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=800&q=80"
   }
 ];
 
