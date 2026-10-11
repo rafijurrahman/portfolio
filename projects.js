@@ -42,7 +42,7 @@ const PROJECTS_DATA = [
     ],
     techStack: ["SQL (SQLite)", "Chained CTEs", "Window Functions", "Anti-Joins", "Data Modeling"],
     caseStudyUrl: "projects/retail-analytics.html",
-    githubUrl: "https://github.com/rafijurrahman",
+    githubUrl: "https://github.com/rafijurrahman/retail-revenue-leakage-sql",
     liveDemoUrl: null,
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80"
   }
