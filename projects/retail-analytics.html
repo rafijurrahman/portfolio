@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case Study: Retail Revenue Leakage & Churn Intelligence | Md. Rafijur Rahman</title>
+  <meta name="description" content="Production SQL case study on relational retail database detecting revenue leakage, dormant customer churn, and regional fulfillment bottlenecks." />
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { 400: '#34d399', 500: '#10b981', 600: '#059669' }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #030712; color: #f3f4f6; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    .glass-card { background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(51, 65, 85, 0.6); }
+    .code-block { background: #020617; border: 1px solid #1e293b; font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased selection:bg-emerald-500 selection:text-slate-950">
+
+  <!-- ================= NAV ================= -->
+  <header class="sticky top-0 z-50 glass-card border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <a href="../index.html" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-emerald-400 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+        <span>Back to Portfolio</span>
+      </a>
+
+      <div class="flex items-center gap-3">
+        <a href="https://github.com/rafijurrahman" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-200 transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          <span>GitHub Profile</span>
+        </a>
+        <a href="#sql-engine" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition-colors">
+          <span>View SQL Queries</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= CASE STUDY CONTAINER ================= -->
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 py-12 lg:py-16">
+
+    <!-- Meta Header -->
+    <div class="mb-10">
+      <div class="flex flex-wrap items-center gap-2 mb-4">
+        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+          PRODUCTION SQL CASE STUDY
+        </span>
+        <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-800 text-slate-300">
+          Chained CTEs
+        </span>
+        <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-800 text-slate-300">
+          Window Functions (DENSE_RANK)
+        </span>
+        <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-800 text-slate-300">
+          Anti-Join Churn Auditing
+        </span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight mb-6">
+        Retail Intelligence: Revenue Leakage, Churn & Regional Fulfillment Audit
+      </h1>
+
+      <p class="text-lg text-slate-300 leading-relaxed">
+        A deep forensic SQL investigation on a 4-table relational database containing ৳1.94M in GMV. Identified ৳449K in cancelled and returned orders, isolated 20% zero-order customer churn, and discovered unexpected high-AOV purchasing behavior across tier-2 cities.
+      </p>
+
+      <!-- Key Impact Bar -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 p-5 rounded-2xl glass-card border border-emerald-500/20">
+        <div>
+          <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">Revenue at Risk</div>
+          <div class="text-2xl font-extrabold text-rose-400 mt-1">৳ 449,050</div>
+          <div class="text-[11px] text-slate-400">Cancelled + Returned</div>
+        </div>
+        <div>
+          <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">Dormant Churn</div>
+          <div class="text-2xl font-extrabold text-amber-400 mt-1">20.0%</div>
+          <div class="text-[11px] text-slate-400">5 / 25 Zero-order users</div>
+        </div>
+        <div>
+          <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">Top Category</div>
+          <div class="text-2xl font-extrabold text-emerald-400 mt-1">৳ 1.16M</div>
+          <div class="text-[11px] text-slate-400">Electronics (60% GMV)</div>
+        </div>
+        <div>
+          <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">Highest AOV City</div>
+          <div class="text-2xl font-extrabold text-white mt-1">৳ 47,650</div>
+          <div class="text-[11px] text-slate-400">Mymensingh (2.3x Dhaka)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Navigation Anchor Links -->
+    <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 mb-12 flex flex-wrap gap-4 text-xs font-mono text-slate-400">
+      <span class="text-slate-300 font-bold">Contents:</span>
+      <a href="#problem" class="hover:text-emerald-400">1. Problem</a>
+      <a href="#schema" class="hover:text-emerald-400">2. Relational Schema</a>
+      <a href="#sql-engine" class="hover:text-emerald-400">3. Advanced SQL Queries</a>
+      <a href="#findings" class="hover:text-emerald-400">4. Analytical Findings</a>
+      <a href="#recommendations" class="hover:text-emerald-400">5. Strategic Recommendations</a>
+    </div>
+
+    <!-- ================= SECTION 1: BUSINESS PROBLEM ================= -->
+    <section id="problem" class="mb-14">
+      <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-mono font-bold">01</span>
+        The Business Problem: Silent Revenue Erosion
+      </h2>
+      <div class="space-y-4 text-slate-300 leading-relaxed text-sm sm:text-base">
+        <p>
+          An e-commerce retail enterprise recorded strong top-line sales of ৳1.94M across 70 orders and 10 nationwide city hubs. However, the executive committee noticed that cash flow did not match reported bookings. Customer acquisition spending was surging, but order fulfillment was suffering from silent bottlenecks.
+        </p>
+        <p>
+          <strong class="text-white font-semibold">The Diagnostic Goal:</strong> Write robust, production SQL queries with zero autocomplete or AI assistance to answer 4 critical business questions:
+        </p>
+        <ul class="list-disc pl-6 space-y-1.5 text-xs sm:text-sm text-slate-400">
+          <li>Exactly how much revenue was lost to cancelled orders, and what portion remains trapped in returns?</li>
+          <li>Which customer accounts registered but never placed a single order (first-touch churn)?</li>
+          <li>How does high-value customer lifetime spend compare against the overall company average?</li>
+          <li>Which product categories drive volume versus margin across each geographic district?</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 2: RELATIONAL SCHEMA ================= -->
+    <section id="schema" class="mb-14">
+      <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-mono font-bold">02</span>
+        Relational Data Architecture (3NF SQLite Schema)
+      </h2>
+
+      <p class="text-slate-400 text-sm mb-6 leading-relaxed">
+        The audit was conducted on a normalized 4-table relational database model (<code class="text-emerald-400 font-mono">retail_analytics.db</code>) enforcing referential integrity between customer profiles, order headers, line items, and product masters:
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
+        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+          <div class="text-emerald-400 font-bold mb-2 flex items-center justify-between">
+            <span>customers (25 rows)</span>
+            <span class="text-[10px] text-slate-500">Dimension</span>
+          </div>
+          <ul class="text-slate-300 space-y-1">
+            <li><span class="text-amber-400">PK</span> customer_id (INTEGER)</li>
+            <li>customer_name (TEXT)</li>
+            <li>city (TEXT)</li>
+            <li>signup_date (TEXT)</li>
+          </ul>
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+          <div class="text-emerald-400 font-bold mb-2 flex items-center justify-between">
+            <span>orders (70 rows)</span>
+            <span class="text-[10px] text-slate-500">Fact Header</span>
+          </div>
+          <ul class="text-slate-300 space-y-1">
+            <li><span class="text-amber-400">PK</span> order_id (INTEGER)</li>
+            <li><span class="text-cyan-400">FK</span> customer_id (INTEGER)</li>
+            <li>order_date (TEXT)</li>
+            <li>total_amount (REAL)</li>
+            <li>order_status (Delivered, Cancelled, Returned, Pending)</li>
+          </ul>
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+          <div class="text-emerald-400 font-bold mb-2 flex items-center justify-between">
+            <span>order_items (139 rows)</span>
+            <span class="text-[10px] text-slate-500">Fact Grain</span>
+          </div>
+          <ul class="text-slate-300 space-y-1">
+            <li><span class="text-amber-400">PK</span> order_item_id (INTEGER)</li>
+            <li><span class="text-cyan-400">FK</span> order_id (INTEGER)</li>
+            <li><span class="text-cyan-400">FK</span> product_id (INTEGER)</li>
+            <li>quantity (INTEGER)</li>
+            <li>unit_price (REAL)</li>
+          </ul>
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+          <div class="text-emerald-400 font-bold mb-2 flex items-center justify-between">
+            <span>products (10 rows)</span>
+            <span class="text-[10px] text-slate-500">Dimension</span>
+          </div>
+          <ul class="text-slate-300 space-y-1">
+            <li><span class="text-amber-400">PK</span> product_id (INTEGER)</li>
+            <li>product_name (TEXT)</li>
+            <li>category (Electronics, Home, Fashion, Grocery)</li>
+            <li>unit_price (REAL)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 3: ADVANCED SQL ENGINE ================= -->
+    <section id="sql-engine" class="mb-14">
+      <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-mono font-bold">03</span>
+        Production SQL Query Architecture
+      </h2>
+
+      <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+        Below are the exact SQL patterns engineered to extract insights without intermediate application-layer overhead:
+      </p>
+
+      <!-- Query 1: Anti-Join Existence Check for Dormant Customers -->
+      <div class="mb-8">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-sm font-bold text-white font-mono flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            1. Anti-Join: Detecting Zero-Order Dormant Customer Churn
+          </h3>
+          <span class="text-xs font-mono text-emerald-400">Result: 5 Dormant Accounts Identified</span>
+        </div>
+        <div class="code-block rounded-2xl p-5 overflow-x-auto text-xs text-slate-300">
+<pre><code><span class="text-slate-500">-- Isolates registered users who have NEVER completed a transaction</span>
+<span class="text-cyan-400">SELECT</span> 
+    c.customer_id,
+    c.customer_name,
+    c.city,
+    c.signup_date
+<span class="text-cyan-400">FROM</span> customers c
+<span class="text-emerald-400">LEFT JOIN</span> orders o <span class="text-cyan-400">ON</span> c.customer_id = o.customer_id
+<span class="text-cyan-400">WHERE</span> o.order_id <span class="text-emerald-400">IS NULL</span>;</code></pre>
+        </div>
+      </div>
+
+      <!-- Query 2: Chained CTE Customer Tiering -->
+      <div class="mb-8">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-sm font-bold text-white font-mono flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            2. Chained CTE: Customer Value Tiering (Platinum, Gold, Silver)
+          </h3>
+          <span class="text-xs font-mono text-emerald-400">Logic: Multi-Level Aggregation</span>
+        </div>
+        <div class="code-block rounded-2xl p-5 overflow-x-auto text-xs text-slate-300">
+<pre><code><span class="text-emerald-400">WITH</span> CustomerTotals <span class="text-emerald-400">AS</span> (
+    <span class="text-cyan-400">SELECT</span> 
+        c.customer_id,
+        c.customer_name,
+        c.city,
+        <span class="text-amber-400">COUNT</span>(o.order_id) <span class="text-cyan-400">AS</span> total_orders,
+        <span class="text-amber-400">COALESCE</span>(<span class="text-amber-400">SUM</span>(o.total_amount), 0) <span class="text-cyan-400">AS</span> lifetime_spend
+    <span class="text-cyan-400">FROM</span> customers c
+    <span class="text-emerald-400">LEFT JOIN</span> orders o <span class="text-cyan-400">ON</span> c.customer_id = o.customer_id 
+        <span class="text-emerald-400">AND</span> o.order_status = <span class="text-rose-400">'Delivered'</span>
+    <span class="text-cyan-400">GROUP BY</span> c.customer_id, c.customer_name, c.city
+),
+TierSegmented <span class="text-emerald-400">AS</span> (
+    <span class="text-cyan-400">SELECT</span> 
+        *,
+        <span class="text-cyan-400">CASE</span> 
+            <span class="text-cyan-400">WHEN</span> lifetime_spend >= 100000 <span class="text-cyan-400">THEN</span> <span class="text-rose-400">'Platinum'</span>
+            <span class="text-cyan-400">WHEN</span> lifetime_spend >= 50000  <span class="text-cyan-400">THEN</span> <span class="text-rose-400">'Gold'</span>
+            <span class="text-cyan-400">WHEN</span> lifetime_spend > 0       <span class="text-cyan-400">THEN</span> <span class="text-rose-400">'Silver'</span>
+            <span class="text-cyan-400">ELSE</span> <span class="text-rose-400">'Dormant'</span>
+        <span class="text-cyan-400">END AS</span> customer_tier
+    <span class="text-cyan-400">FROM</span> CustomerTotals
+)
+<span class="text-cyan-400">SELECT</span> customer_tier, <span class="text-amber-400">COUNT</span>(*) <span class="text-cyan-400">AS</span> customer_count, <span class="text-amber-400">SUM</span>(lifetime_spend) <span class="text-cyan-400">AS</span> tier_revenue
+<span class="text-cyan-400">FROM</span> TierSegmented
+<span class="text-cyan-400">GROUP BY</span> customer_tier
+<span class="text-cyan-400">ORDER BY</span> tier_revenue <span class="text-emerald-400">DESC</span>;</code></pre>
+        </div>
+      </div>
+
+      <!-- Query 3: Window Function (DENSE_RANK top products per category) -->
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-sm font-bold text-white font-mono flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            3. Window Function: Top 2 Best-Selling Products per Category
+          </h3>
+          <span class="text-xs font-mono text-emerald-400">Logic: PARTITION BY + DENSE_RANK</span>
+        </div>
+        <div class="code-block rounded-2xl p-5 overflow-x-auto text-xs text-slate-300">
+<pre><code><span class="text-emerald-400">WITH</span> CategoryRanked <span class="text-emerald-400">AS</span> (
+    <span class="text-cyan-400">SELECT</span> 
+        p.category,
+        p.product_name,
+        <span class="text-amber-400">SUM</span>(oi.quantity) <span class="text-cyan-400">AS</span> total_units_sold,
+        <span class="text-amber-400">SUM</span>(oi.quantity * oi.unit_price) <span class="text-cyan-400">AS</span> total_revenue,
+        <span class="text-amber-400">DENSE_RANK</span>() <span class="text-emerald-400">OVER</span> (
+            <span class="text-cyan-400">PARTITION BY</span> p.category 
+            <span class="text-cyan-400">ORDER BY</span> <span class="text-amber-400">SUM</span>(oi.quantity) <span class="text-emerald-400">DESC</span>
+        ) <span class="text-cyan-400">AS</span> rank_in_category
+    <span class="text-cyan-400">FROM</span> order_items oi
+    <span class="text-cyan-400">JOIN</span> products p <span class="text-cyan-400">ON</span> oi.product_id = p.product_id
+    <span class="text-cyan-400">JOIN</span> orders o <span class="text-cyan-400">ON</span> oi.order_id = o.order_id
+    <span class="text-cyan-400">WHERE</span> o.order_status != <span class="text-rose-400">'Cancelled'</span>
+    <span class="text-cyan-400">GROUP BY</span> p.category, p.product_name
+)
+<span class="text-cyan-400">SELECT</span> * <span class="text-cyan-400">FROM</span> CategoryRanked
+<span class="text-cyan-400">WHERE</span> rank_in_category &lt;= 2;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 4: ANALYTICAL FINDINGS ================= -->
+    <section id="findings" class="mb-14">
+      <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-mono font-bold">04</span>
+        Analytical Report & Key Forensic Discoveries
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl glass-card">
+          <div class="text-rose-400 font-mono text-2xl font-extrabold mb-1">01</div>
+          <h3 class="text-base font-bold text-white mb-2">৳ 449,050 Trapped Margin</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            While Delivered orders generated ৳1.19M, ৳87,400 was lost to outright cancellations (7 orders) and an alarming ৳361,650 was trapped in returns (10 orders)—representing a 23.2% order leakage rate.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl glass-card">
+          <div class="text-amber-400 font-mono text-2xl font-extrabold mb-1">02</div>
+          <h3 class="text-base font-bold text-white mb-2">20% Immediate Onboarding Drop</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            The anti-join revealed that 5 out of 25 registered customers never completed their first order. Marketing spent acquisition budget on these users with zero downstream lifetime value realized.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl glass-card">
+          <div class="text-emerald-400 font-mono text-2xl font-extrabold mb-1">03</div>
+          <h3 class="text-base font-bold text-white mb-2">The "Mymensingh Paradox"</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Dhaka volume averaged an AOV of only ৳20,833, whereas tier-2 cities dominated high-ticket purchasing: Mymensingh recorded an AOV of ৳47,650 (2.3x Dhaka) and Gazipur recorded ৳37,528.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 5: RECOMMENDATIONS ================= -->
+    <section id="recommendations" class="mb-16">
+      <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-mono font-bold">05</span>
+        Actionable Recommendations & ROI
+      </h2>
+
+      <div class="p-6 rounded-2xl glass-card border-l-4 border-l-emerald-500 space-y-4">
+        <div class="flex items-start gap-4">
+          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">1</span>
+          <div>
+            <h4 class="text-sm font-bold text-white">Automated First-Purchase Nudge Engine</h4>
+            <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+              Deploy an automated event trigger for accounts with 0 orders after 72 hours of signup. Offering a targeted 5% first-order discount would reactivate at least 2 of the 5 dormant accounts, unlocking an estimated ৳60K+ in initial gross margin.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">2</span>
+          <div>
+            <h4 class="text-sm font-bold text-white">Pre-Fulfillment Quality Checks on High-Ticket Electronics</h4>
+            <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+              Electronics drives ৳1.16M (60% of total revenue). Instituting a pre-dispatch verification protocol would cut the ৳361K return rate by at least 35%, preserving approx ৳126K in logistics overhead.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">3</span>
+          <div>
+            <h4 class="text-sm font-bold text-white">Reallocate Marketing Budget to Tier-2 High-AOV Hubs</h4>
+            <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+              Shift 25% of digital ad spend from low-AOV Dhaka (৳20.8K) to high-intent regional hubs like Mymensingh (৳47.6K), Gazipur (৳37.5K), and Rangpur (৳33.4K).
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Navigation -->
+    <div class="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <a href="../index.html#projects" class="text-sm text-slate-400 hover:text-white transition-colors">
+        ← Back to All Case Studies
+      </a>
+
+      <div class="flex items-center gap-3">
+        <a href="https://github.com/rafijurrahman" target="_blank" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-white transition-colors">
+          GitHub Profile
+        </a>
+        <a href="../index.html#contact" class="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition-colors shadow-lg shadow-emerald-500/20">
+          Discuss This Case Study
+        </a>
+      </div>
+    </div>
+
+  </article>
+
+  <footer class="py-8 border-t border-slate-900 bg-slate-950 text-slate-500 text-xs text-center">
+    © 2026 Md. Rafijur Rahman. Production Enterprise Case Study.
+  </footer>
+
+</body>
+</html>

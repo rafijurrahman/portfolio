@@ -27,6 +27,24 @@ const PROJECTS_DATA = [
     githubUrl: "https://github.com/rafijurrahman/krishigrid-bangladesh",
     liveDemoUrl: "projects/krishigrid.html#dashboard",
     image: "https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: "retail-revenue-leakage",
+    title: "Retail Intelligence: Revenue Leakage, Churn & Fulfillment Audit",
+    category: "SQL & Data Modeling",
+    badge: "Production SQL",
+    featured: true,
+    summary: "Forensic SQL investigation on a 4-table relational database containing ৳1.94M GMV. Isolated ৳449K in cancelled/returned orders, identified 20% first-touch churn via anti-joins, and uncovered high-AOV purchasing behavior in regional hubs.",
+    impactMetrics: [
+      { label: "Revenue at Risk", value: "৳ 449,050" },
+      { label: "Dormant Churn", value: "20.0% Users" },
+      { label: "Highest AOV", value: "৳ 47,650" }
+    ],
+    techStack: ["SQL (SQLite)", "Chained CTEs", "Window Functions", "Anti-Joins", "Data Modeling"],
+    caseStudyUrl: "projects/retail-analytics.html",
+    githubUrl: "https://github.com/rafijurrahman",
+    liveDemoUrl: null,
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80"
   }
 ];
 
