@@ -29,6 +29,24 @@ const PROJECTS_DATA = [
     image: "https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=800&q=80"
   },
   {
+    id: "cohort-retention-analytics",
+    title: "Customer Cohort Retention & Churn Economics",
+    category: "SQL & Unit Economics",
+    badge: "Enterprise SQL & Economics",
+    featured: true,
+    summary: "Audited 12 customer cohorts (6,400 users, 15,000 transactions) to quantify user decay, Net Revenue Retention (NRR), and channel LTV:CAC unit economics. Uncovered Meta Ads capital drain (-42.6% ROI) versus Organic Search high-margin engine (7.22x LTV:CAC).",
+    impactMetrics: [
+      { label: "Organic LTV:CAC", value: "7.22x" },
+      { label: "Ad Spend Bleed", value: "-৳ 2.86M" },
+      { label: "LTV Expansion", value: "3.98x" }
+    ],
+    techStack: ["SQL (SQLite)", "Cohort Retention", "Net Revenue Retention", "Unit Economics", "LTV:CAC"],
+    caseStudyUrl: "projects/cohort-retention.html",
+    githubUrl: "https://github.com/rafijurrahman/cohort-retention-analytics",
+    liveDemoUrl: null,
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80"
+  },
+  {
     id: "retail-revenue-leakage",
     title: "Retail Intelligence: Revenue Leakage, Churn & Fulfillment Audit",
     category: "SQL & Data Modeling",
